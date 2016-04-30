@@ -29,7 +29,7 @@ Usage: `vagrant init simbo/ubuntu`
 
 Available providers: `virtualbox` (~ 400 MB)
 
-**Ubuntu *“Xenial Xerus”* 16.04 LTS Server amd64**
+Current version: **Ubuntu *“Xenial Xerus”* 16.04 LTS Server amd64**
 
 Using english locales by default and supporting german locales. Set up with 
 german keyboard config, german apt-sources and using Europe/Berlin as default 
