@@ -27,7 +27,7 @@ This is a [packer](https://packer.io/) template for the vagrant box
 
 Usage: `vagrant init simbo/ubuntu`
 
-Available providers: `virtualbox` (~ 400 MB)
+Available providers: `virtualbox` (~ 431 MB)
 
 Current version: **Ubuntu *“Xenial Xerus”* 16.04 LTS Server amd64**
 
