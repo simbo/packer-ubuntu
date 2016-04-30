@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+- 2.0.0
+env:
+  global:
+  - PWD=`pwd`
+  - PACKER_URL=https://releases.hashicorp.com/packer/0.10.0/packer_0.10.0_linux_amd64.zip
+sudo: false
+install:
+- wget --no-check-certificate --output-document $PWD/packer.zip $PACKER_URL
+- unzip -d $PWD/packer $PWD/packer.zip
+- export PATH=$PWD/packer:$PATH
+script:
+- packer validate ubuntu.json
+deploy:
+  provider: script
+  script: packer push ubuntu.json
+  skip_cleanup: true
+  on:
+    tags: true

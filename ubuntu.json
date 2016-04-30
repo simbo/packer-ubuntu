@@ -1,0 +1,103 @@
+{
+
+  "variables": {
+    "version": "0.1.0",
+    "boxname": "ubuntu",
+    "info_url": "https://github.com/simbo/packer-ubuntu#box-info",
+    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.4-server-amd64.iso",
+    "iso_md5": "2ac1f3e0de626e54d05065d6f549fa3a",
+    "vbox_ga_iso_url": "http://download.virtualbox.org/virtualbox/5.0.20/VBoxGuestAdditions_5.0.20.iso",
+    "vbox_ga_iso_sha256": "6fbb59fd22e5f1b287a8a2b623604f0849b702a4ac737b57833f7cec006f01e6",
+    "atlas_artifact": "simbo/ubuntu",
+    "vagrant_user_name": "vagrant",
+    "vagrant_user_pass": "vagrant"
+  },
+
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu_64",
+      "virtualbox_version_file": ".vbox_version",
+      "headless": true,
+      "vboxmanage": [
+        [
+          "modifyvm", "{{.Name}}",
+          "--vram", "32",
+          "--memory", "512",
+          "--cpus", "1",
+          "--usb", "off",
+          "--audio", "none",
+          "--nic1", "nat"
+        ]
+      ],
+      "disk_size" : 20000,
+      "iso_urls": [
+        "iso/{{ user `boxname` }}.iso",
+        "{{ user `iso_url` }}"
+      ],
+      "iso_checksum": "{{ user `iso_md5` }}",
+      "iso_checksum_type": "md5",
+      "guest_additions_mode": "upload",
+      "guest_additions_url": "{{ user `vbox_ga_iso_url` }}",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_additions_sha256": "{{ user `vbox_ga_iso_sha256` }}",
+      "http_directory" : "{{ user `boxname` }}/htdocs",
+      "http_port_min" : 9000,
+      "http_port_max" : 9010,
+      "ssh_username": "{{ user `vagrant_user_name` }}",
+      "ssh_password": "{{ user `vagrant_user_pass` }}",
+      "ssh_wait_timeout": "20m",
+      "shutdown_command": "echo {{ user `vagrant_user_pass` }} | sudo -S shutdown -P now",
+      "boot_wait": "10s",
+      "boot_command" : [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US.UTF-8 auto ",
+        "locale=en_US.UTF-8 ",
+        "hostname={{ user `boxname` }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "kbd-chooser/method=de ",
+        "keymap=de ",
+        "debian-installer/keymap=de ",
+        "keyboard-configuration/modelcode=pc105 ",
+        "keyboard-configuration/layout=German ",
+        "keyboard-configuration/variant=German ",
+        "localechooser/translation/warn-light=true ",
+        "localechooser/translation/warn-severe=true ",
+        "console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{ user `boxname` }}/provision",
+      "destination": "/tmp"
+    },
+    {
+      "type": "shell",
+      "environment_vars": [
+        "VAGRANT_USER={{ user `vagrant_user_name` }}",
+        "VAGRANT_PASS={{ user `vagrant_user_pass` }}"
+      ],
+      "execute_command": "echo '{{ user `vagrant_user_pass` }}' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "{{ user `boxname` }}/provision.sh"
+      ]
+    }
+  ],
+
+  "post-processors": [
+    [
+      {
+        "type": "vagrant",
+        "output": "build/{{ user `boxname` }}.box",
+        "compression_level": 9,
+        "keep_input_artifact": true
+      }
+    ]
+  ]
+}

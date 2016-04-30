@@ -1,0 +1,6 @@
+/packer_cache
+/output-*
+/iso
+/build
+/.vagrant
+/Vagrantfile
