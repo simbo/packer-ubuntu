@@ -5,6 +5,7 @@ env:
   global:
   - PWD=`pwd`
   - PACKER_URL=https://releases.hashicorp.com/packer/0.10.0/packer_0.10.0_linux_amd64.zip
+  - secure: Bvg7U9ZCX0uLEPiGpOb2pjOGQnLKQUh/lh1dy079vIqRfqUSm9UDAUCG+YQSMRYFhxXA47/KesjiSXWeVvdifyj6ctU7J5Ffpfy7aRcTAn1BrE5jWRMx1kY4WTUw2xORLSgAK23Q28U70iziAEbUtJMwpTGaOU7nriYL3MOLuk5SNJyyEddSKn6zTdKIhnuZHv9qL7rAH40IdJkpGFi2hSW5rs1dblYzRp7v0vv9MeyC89zSGE1Fq/hsFuV7fSpfamA6lWrmIFZdlHyJBWI8YF0shtxxiJcZ/peyKyHog3LVl3vPvhWiBnEoQMlqYCmqDbtP8XhecdU/ZKiyvCZicMq+gvaLvaR0By8qBJY5QRk513+7zA3njoeGI/5Xc2cNEWRtWhhgCZs4UCnfYFrUxU4oz19LraDxEB8FEvM+s732mOgxjp/5vJgTfHP/n5SDvDucS8C98aQM9HGTsM1b7mDr4uJiYqmZPCuJkY9JLY4OFWasW+PjCS++9GuZewNx7gsFjb+e/OXp4g+o+TIN4fAvgHepLTHhx2/qDQy4oqiwhvXAkWBScJBJx6UkCxqGPtgb2pbyxVRoVuYngR4HjXWqB8ptK4mcW1zo6EYWBCv9P4CAE2jGD0U+3Gj/tbsqywq6znex0AabXjxMdTsub/i8yNnwIqFaILmKHgmyIZo=
 sudo: false
 install:
 - wget --no-check-certificate --output-document $PWD/packer.zip $PACKER_URL

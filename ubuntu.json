@@ -18,7 +18,7 @@
       "type": "virtualbox-iso",
       "guest_os_type": "Ubuntu_64",
       "virtualbox_version_file": ".vbox_version",
-      "headless": true,
+      "headless": false,
       "vboxmanage": [
         [
           "modifyvm", "{{.Name}}",
@@ -99,8 +99,34 @@
         "type": "vagrant",
         "output": "build/{{ user `boxname` }}.box",
         "compression_level": 9,
-        "keep_input_artifact": true
+        "keep_input_artifact": false
+      },
+      {
+        "type": "atlas",
+        "only": [
+          "virtualbox-iso"
+        ],
+        "artifact": "{{ user `atlas_artifact` }}",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox",
+          "version": "{{ user `version` }}",
+          "description": "See box description at {{ user `info_url` }}",
+          "created_at": "{{ timestamp }}"
+        }
       }
     ]
-  ]
+  ],
+
+  "push": {
+    "name": "{{ user `atlas_artifact` }}",
+    "base_dir": ".",
+    "include": [
+      "{{ user `boxname` }}/*",
+      "{{ user `boxname` }}/htdocs/*",
+      "{{ user `boxname` }}/provision/files/*",
+      "{{ user `boxname` }}/provision/scripts/*"
+    ]
+  }
+
 }
