@@ -55,7 +55,6 @@ apt-get -y -qq autoremove --purge
 apt-get -y -qq purge deborphan dialog
 apt-get -y -qq autoclean
 apt-get -y -qq clean
-aptitude -y clean
 
 echo_c "Removing APT files..."
 find /var/lib/apt -type f | xargs rm -f
