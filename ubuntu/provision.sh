@@ -19,6 +19,7 @@ source $PROVISION_SCRIPTS/vbox-guest-additions.sh
 source $PROVISION_SCRIPTS/zsh.sh
 source $PROVISION_SCRIPTS/node.sh
 source $PROVISION_SCRIPTS/customize.sh
+source $PROVISION_SCRIPTS/vagrant-fix.sh
 source $PROVISION_SCRIPTS/cleanup.sh
 
 # cleanup provision files
