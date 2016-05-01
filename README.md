@@ -48,6 +48,7 @@ Installed software:
   - **nfs-common**
   - **curl**
   - **vim**
+  - **nano**
   - **mc**
   - **htop**
   - **iotop**

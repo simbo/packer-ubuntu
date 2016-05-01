@@ -20,4 +20,4 @@ apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-
 
 echo_c "Install Packages..."
 
-apt-get -y -qq install curl vim mc htop iotop iftop tree git zsh
+apt-get -y -qq install curl vim nano mc htop iotop iftop tree git zsh
