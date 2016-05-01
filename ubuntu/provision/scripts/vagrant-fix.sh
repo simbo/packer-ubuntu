@@ -9,8 +9,8 @@
 
 # update bootloader (grub)
 sed -i /etc/default/grub \
-  -e "s/GRUB_TIMEOUT=[0-9]\+/GRUB_TIMEOUT=1/g" \
-  -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/GRUB_CMDLINE_LINUX_DEFAULT=\"net.ifnames=0 quiet\"/g"
+  -e "s/GRUB_HIDDEN_TIMEOUT=[0-9]\+/GRUB_HIDDEN_TIMEOUT=1/g" \
+  -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"net.ifnames=0 quiet\"/g"
 update-grub
 
 # update network interfaces
