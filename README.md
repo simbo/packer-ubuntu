@@ -39,8 +39,8 @@ Default vagrant config with vagrant insecure key and passwordless sudo.
 
 Installed software:
   - **git** (via ppa:git-core/ppa)
-  - **zsh** as default shell with **oh-my-zsh** and **zsh-git-prompt**
-  - **node.js** v6.0.0 (via **nvm**) with **npm** v3.8.8
+  - **zsh** as default shell with **oh-my-zsh**
+  - **node.js** v6.3.0 (via **nvm**) with **npm** v3.10.5
   - **VirtualBox Guest Additions** v5.0.20
   - **openssh-server**
   - **build-essential**
