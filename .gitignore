@@ -2,5 +2,7 @@
 /output-*
 /iso
 /build
+/.idea
 /.vagrant
 /Vagrantfile
+
